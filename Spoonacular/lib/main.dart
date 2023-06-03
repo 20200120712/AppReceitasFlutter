@@ -143,15 +143,15 @@ class DescreverReceitasPage extends StatelessWidget {
             Image.network(recipeDetails['image']),
             SizedBox(height: 16),
             Text(
-              'Ingredientes:',
+              'Ingredients:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 8),
             Expanded(
               child: ListView.builder(
-                itemCount: recipeDetails['extendedIngredients'].length,
+                itemCount: recipeDetails['extendedIngredientes'].length,
                 itemBuilder: (context, index) {
-                  return Text('- ${recipeDetails['extendedIngredients'][index]['original']}');
+                  return Text('- ${recipeDetails['extendedIngredientes'][index]['original']}');
                 },
               ),
             ),
