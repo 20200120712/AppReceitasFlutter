@@ -19,6 +19,42 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class InicioPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Inicio'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Bem vindo ao Aplicativo de Receitas!',
+              style: TextStyle(fontSize: 24),
+            ),
+            SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/search');
+              },
+              child: Text('Pesquisar Receitas'),
+            ),
+            SizedBox(height: 8),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/about');
+              },
+              child: Text('Sobre'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class PesquisarReceitasPage extends StatefulWidget {
   @override
   _PesquisarReceitasPageState createState() => _PesquisarReceitasPageState();
@@ -102,7 +138,7 @@ class DescreverReceitasPage extends StatelessWidget {
             Image.network(recipeDetails['image']),
             SizedBox(height: 16),
             Text(
-              'Ingredientes:',
+              'Ingredients:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 8),
