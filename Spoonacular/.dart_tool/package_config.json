@@ -278,13 +278,13 @@
       "languageVersion": "2.17"
     },
     {
-      "name": "flutter_app",
+      "name": "copia_poo",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-06-03T15:01:13.257826Z",
+  "generated": "2023-06-03T15:40:33.665046Z",
   "generator": "pub",
-  "generatorVersion": "3.0.2"
+  "generatorVersion": "3.0.3"
 }

@@ -14,7 +14,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: PesquisarReceitasPage(),
+            initialRoute: '/',
+      routes: {
+        '/': (context) => InicioPage(),
+        '/search': (context) => PesquisarReceitasPage(),
+        '/about': (context) => AboutPage(),
+      }
     );
   }
 }
@@ -138,15 +143,15 @@ class DescreverReceitasPage extends StatelessWidget {
             Image.network(recipeDetails['image']),
             SizedBox(height: 16),
             Text(
-              'Ingredients:',
+              'Ingredientes:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 8),
             Expanded(
               child: ListView.builder(
-                itemCount: recipeDetails['extendedIngredientes'].length,
+                itemCount: recipeDetails['extendedIngredients'].length,
                 itemBuilder: (context, index) {
-                  return Text('- ${recipeDetails['extendedIngredientes'][index]['original']}');
+                  return Text('- ${recipeDetails['extendedIngredients'][index]['original']}');
                 },
               ),
             ),
@@ -156,3 +161,35 @@ class DescreverReceitasPage extends StatelessWidget {
     );
   }
 }
+
+class AboutPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('About'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Aplicaivo de Receitas',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Desenvolvido por:',
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(height: 8),
+            Text('Daniel Leônidas de Medeiros'),
+            Text('Sueliton dos Santos Medeiros'),
+            Text('Vinicius Victor de Lima'),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
