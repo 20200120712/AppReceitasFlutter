@@ -149,9 +149,9 @@ class DescreverReceitasPage extends StatelessWidget {
             SizedBox(height: 8),
             Expanded(
               child: ListView.builder(
-                itemCount: recipeDetails['extendedIngredientes'].length,
+                itemCount: recipeDetails['extendedIngredients'].length,
                 itemBuilder: (context, index) {
-                  return Text('- ${recipeDetails['extendedIngredientes'][index]['original']}');
+                  return Text('- ${recipeDetails['extendedIngredients'][index]['original']}');
                 },
               ),
             ),
