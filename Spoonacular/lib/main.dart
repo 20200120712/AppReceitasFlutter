@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'recipe_api.dart';
 
-
 void main() {
   runApp(MyApp());
 }
@@ -14,12 +13,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-            initialRoute: '/',
+      initialRoute: '/',
       routes: {
         '/': (context) => InicioPage(),
         '/search': (context) => PesquisarReceitasPage(),
         '/about': (context) => AboutPage(),
-      }
+        '/favorites': (context) => FavoritesPage(),
+      },
     );
   }
 }
@@ -52,6 +52,13 @@ class InicioPage extends StatelessWidget {
                 Navigator.pushNamed(context, '/about');
               },
               child: Text('Sobre'),
+            ),
+            SizedBox(height: 8),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/favorites');
+              },
+              child: Text('Favoritos'),
             ),
           ],
         ),
@@ -114,6 +121,19 @@ class _PesquisarReceitasPageState extends State<PesquisarReceitasPage> {
                       ),
                     );
                   },
+                  trailing: IconButton(
+                    icon: Icon(Icons.favorite),
+                    onPressed: () {
+                      Recipe recipe = Recipe(
+                        id: _recipes[index]['id'],
+                        title: _recipes[index]['title'],
+                        image: _recipes[index]['image'],
+                      );
+                      setState(() {
+                        FavoritesPage.favoriteRecipes.add(recipe);
+                      });
+                    },
+                  ),
                 );
               },
             ),
@@ -193,3 +213,48 @@ class AboutPage extends StatelessWidget {
   }
 }
 
+class FavoritesPage extends StatefulWidget {
+  static List<Recipe> favoriteRecipes = [];
+
+  @override
+  _FavoritesPageState createState() => _FavoritesPageState();
+}
+
+class _FavoritesPageState extends State<FavoritesPage> {
+  void _removeFavorite(Recipe recipe) {
+    setState(() {
+      FavoritesPage.favoriteRecipes.remove(recipe);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Favoritos'),
+      ),
+      body: ListView.builder(
+        itemCount: FavoritesPage.favoriteRecipes.length,
+        itemBuilder: (context, index) {
+          Recipe recipe = FavoritesPage.favoriteRecipes[index];
+          return ListTile(
+            title: Text(recipe.title),
+            leading: Image.network(recipe.image),
+            trailing: IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () => _removeFavorite(recipe),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class Recipe {
+  final int id;
+  final String title;
+  final String image;
+
+  Recipe({required this.id, required this.title, required this.image});
+}
